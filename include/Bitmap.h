@@ -4,8 +4,13 @@
 
 class Bitmap{
     public:
-    /* Update the bitmap from 2d array pixels, applying scaling; */
-    void updateBitmap(const std::vector<std::vector<uint8_t>>& pixels) {
+        int width, height, scale;
+        std::vector<uint8_t> bitmap;
+        Bitmap(int w, int h, int s): width(w), height(h), scale(s) {
+            bitmap.reserve(width * height / 8  );
+        }
+        /* Update the bitmap from 2d array pixels, applying scaling; */
+        void updateBitmap(const std::vector<std::vector<uint8_t>>& pixels) {
             for (int cellX = 0; cellX < width/scale; cellX++) {
                 for (int cellY = 0; cellY < height/scale; cellY++) {
                     // Determine the block of pixels for this cell
@@ -26,10 +31,5 @@ class Bitmap{
                     }
                 }
             }
-        }
-        int width, height, scale;
-        std::vector<uint8_t> bitmap;
-        Bitmap(int w, int h, int s): width(w), height(h), scale(s) {
-            bitmap.reserve(width * height / 8  );
         }
 };
